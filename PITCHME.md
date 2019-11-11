@@ -37,9 +37,9 @@
 +++
 
 ```css:6-2
-    .error {
-     color: red;
-    }
+            .error {
+             color: red;
+            }
 ```
 #### エラーメッセージのstylesheet
 
@@ -72,7 +72,8 @@ router.post('/add', (req, res, next) => {
     req.check('mail','MAIL はメールアドレスを記入して下さい。').isEmail();
     req.check('age', 'AGE は年齢（整数）を入力下さい。').isInt();
 ```
-#### reqのcheckメソッドを呼び出して具体的な内容を設定
+#### reqのcheckメソッドを呼び出して
+#### 具体的な内容を設定
 
 +++
 
@@ -91,7 +92,15 @@ router.post('/add', (req, res, next) => {
                 form: req.body
             }
             res.render('hello/add', data);
-        } else {
+        } 
+```
+@[1](バリデーションの結果を受け取るメソッド)
+@[2](空かどうかの識別)
+@[3,4,5,6,7,8,9,10,11,12,13](resultからバリデーションの結果情報を配列として取り出す)
++++
+
+```js
+        else {
             var nm = req.body.name;
             var ml = req.body.mail;
             var ag = req.body.age;
