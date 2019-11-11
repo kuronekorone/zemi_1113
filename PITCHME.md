@@ -30,5 +30,5 @@
     <input type="text" name="age"value="<%= form.age %>">
     <input type="submit" value="作成">
 ```
-#### フォームに用意している<input>タグにvalue属性を追加
+#### フォームに用意している\<input>タグにvalue属性を追加
  
