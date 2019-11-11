@@ -24,8 +24,8 @@
 
 +++
 
-```js
-    <td><input type="text" name="name"value="<%= form.name %>"><\td>
+```html
+    <input type="text" name="name"value="<%= form.name %>">
     <input type="text" name="mail"value="<%= form.mail %>">
     <input type="text" name="age"value="<%= form.age %>">
     <input type="submit" value="作成">
