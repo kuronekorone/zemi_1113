@@ -30,8 +30,9 @@
     <input type="text" name="age"value="<%= form.age %>">
     <input type="submit" value="作成">
 ```
-#### フォームに用意しているinputタグにvalue属性を追加
-- フォームに再入力してくれる |
+#### フォームに用意しているinputタグに
+#### value属性を追加
+#### フォームに再入力してくれる |
  
 +++
 
@@ -51,7 +52,7 @@ const{check, validationResult} = require('express-validator');
 
 +++
 
-```ja:6-4 GET
+```js:6-4 GET
 router.get('/add', (req, res, next) => {
     var data = {
         title: 'Hello/Add',
@@ -61,12 +62,48 @@ router.get('/add', (req, res, next) => {
     res.render('hello/add', data);
 });
 ```
-* 初期状態の定義をするGET
+#### 初期状態の定義をするGET
 
 +++
 
+```js
+router.post('/add', (req, res, next) => {
+    req.check('name','NAME は必ず入力して下さい。').notEmpty();
+    req.check('mail','MAIL はメールアドレスを記入して下さい。').isEmail();
+    req.check('age', 'AGE は年齢（整数）を入力下さい。').isInt();
+```
+#### reqのcheckメソッドを呼び出して具体的な内容を設定
 
++++
 
-
+```js
+    req.getValidationResult().then((result) => {
+        if (!result.isEmpty()) {
+            var re = '<ul class="error">';
+            var result_arr = result.array();
+            for(var n in result_arr) {
+                re += '<li>' + result_arr[n].msg + '</li>'
+            }
+            re += '</ul>';
+            var data = {
+                title: 'Hello/Add',
+                content: re,
+                form: req.body
+            }
+            res.render('hello/add', data);
+        } else {
+            var nm = req.body.name;
+            var ml = req.body.mail;
+            var ag = req.body.age;
+            var data = {'name':nm, 'mail':ml, 'age':ag};
+            
+            var connection = mysql.createConnection(mysql_setting);
+            connection.connect();
+            connection.query('insert into mydata set ?', data, 
+                    function (error, results, fields) {
+                res.redirect('/hello');
+            });
+            connection.end();
+```
 
 
