@@ -23,11 +23,12 @@
 - と、言うことでいつも通りインストール  |
 
 +++
-
+### 6-1より抜粋
 ```html
     <input type="text" name="name"value="<%= form.name %>">
     <input type="text" name="mail"value="<%= form.mail %>">
     <input type="text" name="age"value="<%= form.age %>">
     <input type="submit" value="作成">
 ```
+#### フォームに用意している<input>タグにvalue属性を追加
  
