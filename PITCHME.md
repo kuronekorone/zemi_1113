@@ -66,18 +66,19 @@ router.get('/add', (req, res, next) => {
 
 +++
 
-```js
-router.post('/add', (req, res, next) => {
-    req.check('name','NAME は必ず入力して下さい。').notEmpty();
-    req.check('mail','MAIL はメールアドレスを記入して下さい。').isEmail();
-    req.check('age', 'AGE は年齢（整数）を入力下さい。').isInt();
+```js:6-4 POST
+router.post('/add', [
+   check('name','NAME は必ず入力して下さい。').not().isEmpty(),
+   check('mail', 'MAIL はメールアドレスを記入して下さい。').isEmail(),
+   check('age', 'AGE は年齢（整数）を入力下さい。').isInt(),
+], (req, res, next) => {
+   const errors = validationResult(req);
 ```
 #### reqのcheckメソッドを呼び出して
 #### 具体的な内容を設定
-##### notEmpty:空入力を禁止する
-##### isEmail:メールアドレスのみ受け付け
-##### isInt:整数のみ受け付け
-
+@[2](isEmpty:空入力ならtrueを返す)
+@[3](isEmail:メールアドレスのみ受け付け)
+@[4](isInt:整数のみ受け付け)
 +++
 
 ```js
@@ -141,10 +142,12 @@ router.post('/add', (req, res, next) => {
     - バリデーション |
 - <input>タグにvalue属性を追加する
     -  フォームに再入力するため |
-- isEmail
-    - メールアドレスのみ受け付け |
-- isInt
-    - 整数のみ受け付け |
+- 値が空だったらtrueを返す
+    - isEmpty() |
+- メールアドレスのみ受け付け
+    - isEmail() |
+- 整数のみ受け付け
+    - isInt() |
 - bodyから指定の名前のデータを探してチェック
     - checkBody |
 
@@ -334,7 +337,9 @@ router.get('/:page', (req, res, next) => {
 - 複数のデータベースに対応し変更処理が簡単なモジュール
     - Bookshelf |
 - 検索の処理をする際に条件を設定して絞り込みを行うメソッド
-    - where |
+    - where() |
+- レコードを１つだけ取り出すメソッド
+    - fetch() |
 - ページ分けの機能
     - ページネーション |
     
@@ -378,5 +383,18 @@ router.get('/:page', (req, res, next) => {
 
 ### messageテーブル
 ![message](message.png)
+
++++
+
+### 区切りはよろしくないですがここで終了
+
++++
+
+### まとめ
+* とくになし |
+
++++
+
+### ご静聴ありがとうございました
 
 
