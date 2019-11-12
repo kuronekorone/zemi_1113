@@ -32,7 +32,7 @@
 ```
 #### フォームに用意しているinputタグに
 #### value属性を追加
-#### フォームに再入力してくれる |
+#### フォームに再入力してくれる
  
 +++
 
@@ -74,8 +74,8 @@ router.post('/add', [
 ], (req, res, next) => {
    const errors = validationResult(req);
 ```
-#### reqのcheckメソッドを呼び出して
-#### 具体的な内容を設定
+##### reqのcheckメソッドを呼び出して
+##### 具体的な内容を設定
 @[2](isEmpty:空入力ならtrueを返す)
 @[3](isEmail:メールアドレスのみ受け付け)
 @[4](isInt:整数のみ受け付け)
@@ -144,10 +144,14 @@ router.post('/add', [
 
 - 入力された値をチェックする機能
     - バリデーション |
-- <input>タグにvalue属性を追加する
+- inputタグにvalue属性を追加する
     -  フォームに再入力するため |
 - 値が空だったらtrueを返す
     - isEmpty() |
+
++++
+
+### まとめ
 - メールアドレスのみ受け付け
     - isEmail() |
 - 整数のみ受け付け
@@ -252,6 +256,9 @@ router.post('/add', (req, res, next) => {
 +++
 
 ![6-7add](6-7add.png)
+
++++
+
 ![6-7he](6-7he.png)
 
 +++
@@ -339,10 +346,10 @@ router.get('/:page', (req, res, next) => {
 <span><a href="/hello/<%= pagination.pageCount %>">Last &gt;&gt;</a></span>
 </div>
 ```
-@[1](最初のページ)
-@[3](前のページ)
-@[5](次のページ)
-@[7](最後のページ)
+@[2](最初のページ)
+@[4](前のページ)
+@[6](次のページ)
+@[8](最後のページ)
 
 +++ 
 
