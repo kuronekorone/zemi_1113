@@ -256,9 +256,32 @@ router.get('/find', (req, res, next) => {
     res.render('hello/find', data);
 });
 ```
+@[]()
 
++++
 
+```js
+router.post('/find', (req, res, next) => {
+    new MyData().where('id', '=', req.body.fstr).fetch().then((collection) => {
+        var data = {
+            title: 'Hello!',
+            content: '※id = ' + req.body.fstr + ' の検索結果：',
+            form: req.body,
+            mydata: collection
+        };
+        res.render('hello/find', data);
+    })
+});
+```
+@[2](whereとfetchの２つのメソッドがある)
+@[2](where(項目名,比較記号,値)で比較した結果が帰ってくる)
+@[2]()
 
++++
+
+```js
+Bookshelf.plugin('pagination'); //★fetchPage追加
+```
 
 
 
