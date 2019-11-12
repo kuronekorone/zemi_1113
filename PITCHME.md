@@ -164,7 +164,7 @@ router.post('/add', (req, res, next) => {
 +++
 
 ### そんなあなたに！
-### Bookshelf |
+### Bookshelf
 
 +++
 ### Bookshelfとは
@@ -178,7 +178,89 @@ router.post('/add', (req, res, next) => {
 ```html
 <% var obj = content[i].attributes; %>
 ```
-#### 
+#### attributeプロパティのBaseModelオブジェクトを取り出す
+
++++
+
+```js
+var knex = require('knex')({
+    dialect: 'mysql',
+    connection: {
+                host     : 'localhost',
+                user     : 'root',
+                password : '',
+                database : 'my-nodeapp-db',
+                charset  : 'utf8'
+      }
+});
+```
+@[1](requireしたオブジェクトの関数を実行)
+
++++
+
+```js
+var Bookshelf = require('bookshelf')(knex);
+```
+#### Bookshelfをロードし、関数を実行
+
++++
+
+```js
+var MyData = Bookshelf.Model.extend({
+    tableName: 'mydata'
+});
+```
+#### Bookshelfのメソッドを使用し、テーブルにアクセスするオブジェクトを作成
+
+
+
+```js:6-6
+new MyData().fetchAll().then((collection) => {
+        var data = {
+                    title: 'Hello!',
+                    content: collection.toArray()
+                };
+                res.render('hello/index', data);
+   })
+   .catch((err) => {
+        res.status(500).json({error: true, data: {message: err.message}});
+   });
+ ```
+@[1,8](MyDataから全レコードを取り出す)
+@[9](エラー情報をまとめた引数)
+
++++
+
+#### 保存の処理
+```js:6-7
+router.post('/add', (req, res, next) => {
+    var response = res;
+    new MyData(req.body).save().then((model) => {
+        response.redirect('/hello');
+    });
+});
+```
+@[3](MyDataオブジェクトに設定する値をreq.bodyに指定すると、送信されたフォームの値がそのまま設定できる)
+
++++
+
+#### 検索の処理
+```js
+router.get('/find', (req, res, next) => {
+    var data = {
+        title: '/Hello/Find',
+        content: '検索IDを入力：',
+        form: {fstr:''},
+        mydata: null
+    };
+    res.render('hello/find', data);
+});
+```
+
+
+
+
+
 
 
 
