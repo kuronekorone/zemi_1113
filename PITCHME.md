@@ -344,7 +344,7 @@ router.get('/:page', (req, res, next) => {
 
 +++
 
-### 要件定義
+### 要件定義的なもの
 * ユーザー名とパスワードを登録
 * 初回アクセス時は自動でログインページへ
 * メッセージを記入するフォームがある
@@ -353,21 +353,29 @@ router.get('/:page', (req, res, next) => {
 * アカウント作成のリンクがある
 * ユーザーの投稿をまとめてみれる
 
++++
 
+### まずは５つのモジュールをインストール
+*  npm install --save express-session
+*  npm install --save express-validator
+*  npm install --save mysql
+*  npm install --save knex
+*  npm install --save bookshelf
 
++++
 
+#### 1.XAMPを起動
+#### 2.コントロールパネルでApacheとMySQLを起動 |
+#### 3.phpMyAdminにアクセス |
+#### 4.my-nodeapp-dbを選択 |
 
++++
 
+### usersテーブル
 
++++
 
-
-
-
-
-
-
-
-
+### messageテーブル
 
 
 
