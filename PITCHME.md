@@ -245,7 +245,7 @@ router.post('/add', (req, res, next) => {
 +++
 
 #### 検索の処理
-```js
+```js:6-9
 router.get('/find', (req, res, next) => {
     var data = {
         title: '/Hello/Find',
@@ -256,11 +256,11 @@ router.get('/find', (req, res, next) => {
     res.render('hello/find', data);
 });
 ```
-@[]()
+#### 検索画面の初期状態
 
 +++
 
-```js
+```js:6-9
 router.post('/find', (req, res, next) => {
     new MyData().where('id', '=', req.body.fstr).fetch().then((collection) => {
         var data = {
@@ -280,7 +280,6 @@ router.post('/find', (req, res, next) => {
 +++
 
 ### ページネーションとは
-* ページ分けの機能
  * データベースにたくさんデータが入るようになると全部表示するのは大変！ |
  * なら、ページ分けしよう！ |
 
@@ -298,10 +297,50 @@ router.get('/:page', (req, res, next) => {
     var pg = req.params.page;
     pg *= 1;
     if (pg < 1){ pg = 1; }
+    new MyData().fetchPage({page:pg, pageSize:3}).then((collection) => {
+        var data = {
+            title: 'Hello!',
+            content: collection.toArray(),
+            pagination:collection.pagination
+        };
     …以下略…
 ```
+@[1](「:page」にページの値が入る)
+@[2](req.paramsの中にページの値がまとめられている)
+@[5](fetchAllのPage版)
+@[9](ページネーションに関する情報をまとめたオブジェクト)
 
++++
 
+```html:6-11
+<div>
+<span><a href="/hello/1">&lt;&lt; First</a></span>
+｜
+<span><a href="/hello/<%= pagination.page - 1 %>">&lt;&lt; prev</a></span>
+｜
+<span><a href="/hello/<%= pagination.page + 1 %>">Next &gt;&gt;</a></span>
+｜
+<span><a href="/hello/<%= pagination.pageCount %>">Last &gt;&gt;</a></span>
+</div>
+```
+@[1](最初のページ)
+@[3](前のページ)
+@[5](次のページ)
+@[7](最後のページ)
+
++++ 
+
+### まとめ
+- 複数のデータベースに対応し変更処理が簡単なモジュール
+    - Bookshelf |
+- 検索の処理をする際に条件を設定して絞り込みを行うメソッド
+    - where |
+- ページ分けの機能
+    - ページネーション |
+    
+---
+
+## 7-1 DB版ミニ伝言板
 
 
 
