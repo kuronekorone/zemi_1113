@@ -279,14 +279,27 @@ router.post('/find', (req, res, next) => {
 
 +++
 
-```js
-Bookshelf.plugin('pagination'); //★fetchPage追加
-```
+### ページネーションとは
+* ページ分けの機能
+ * データベースにたくさんデータが入るようになると全部表示するのは大変！ |
+ * なら、ページ分けしよう！ |
 
 +++
 
-### ページネーションとは
+```js:6-10
+Bookshelf.plugin('pagination'); //★fetchPage追加
+```
+#### paginationプラグインを使えるようにする処理
 
++++
+
+```js:6-10
+router.get('/:page', (req, res, next) => {
+    var pg = req.params.page;
+    pg *= 1;
+    if (pg < 1){ pg = 1; }
+    …以下略…
+```
 
 
 
