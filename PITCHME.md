@@ -372,11 +372,11 @@ router.get('/:page', (req, res, next) => {
 +++
 
 ### usersテーブル
-![users](users.jpg)
+![users](users.png)
 
 +++
 
 ### messageテーブル
-![message](message.jpg)
+![message](message.png)
 
 
