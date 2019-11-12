@@ -275,13 +275,17 @@ router.post('/find', (req, res, next) => {
 ```
 @[2](whereとfetchの２つのメソッドがある)
 @[2](where(項目名,比較記号,値)で比較した結果が帰ってくる)
-@[2]()
+@[2](fetchはレコードを１つだけ取り出す)
 
 +++
 
 ```js
 Bookshelf.plugin('pagination'); //★fetchPage追加
 ```
+
++++
+
+### ページネーションとは
 
 
 
